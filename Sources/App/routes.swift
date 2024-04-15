@@ -22,6 +22,16 @@ func routes(_ app: Application) throws {
         "Movies of action"
     }
     
+    // /movies
+    app.get("movies") { req async in
+     [
+        Movie(title: "Batman", year: 2012),
+        Movie(title: "Wolf of WallStreet", year: 2020),
+        Movie(title: "Barbie", year: 2024),
+        Movie(title: "SpiderMan", year: 2004)
+     ]
+    }
+    
     // route parameters/dynamic parameters
     /// http://127.0.0.1:8080/movies/drama
     
