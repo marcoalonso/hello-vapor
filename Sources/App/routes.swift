@@ -1,5 +1,5 @@
 import Vapor
-
+/*
 func routes(_ app: Application) throws {
     app.get { req async in
         "It works!"
@@ -63,5 +63,35 @@ func routes(_ app: Application) throws {
             throw Abort(.badRequest)
         }
         return "All movies of genre: \(genre) for year \(year)"
+    }
+}
+ */
+
+func routes(_ app: Application) throws {
+    // /movies
+    // /movies/123
+    let movies = app.grouped("movies")
+    
+    // /movies
+    movies.get { req async -> String in
+        return "Movies"
+    }
+    
+    // /movies/123
+    movies.get(":movieId") { req async throws -> String in
+        guard let movieId = req.parameters.get("movieId") else {
+            throw Abort(.badRequest)
+        }
+        
+        return "MovieId : \(movieId)"
+    }
+    
+    //    MARK: - Users
+    // /users/premium
+    let users = app.grouped("users")
+    
+    // /users/123
+    users.get("premium") { req async throws -> String in
+        return "Premium"
     }
 }
