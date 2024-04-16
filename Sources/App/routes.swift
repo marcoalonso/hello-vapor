@@ -9,6 +9,14 @@ func routes(_ app: Application) throws {
         "Hello, world!"
     }
     
+    // /hotels?sort=desc&search=morelia
+    app.get("hotels") { req async throws in
+        let hotelQuery = try req.query.decode(HotelQuery.self)
+        return hotelQuery
+        
+        
+    }
+    
     //Post
     app.post("movies") { req async throws in
         let movie = try req.content.decode(Movie.self)
