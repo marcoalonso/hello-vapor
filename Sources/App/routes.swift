@@ -9,6 +9,12 @@ func routes(_ app: Application) throws {
         "Hello, world!"
     }
     
+    //Post
+    app.post("movies") { req async throws in
+        let movie = try req.content.decode(Movie.self)
+        return movie
+    }
+    
     app.get("customers", ":customerId") { req async throws -> String in
         guard let customerId = req.parameters.get("customerId", as: Int.self) else {
             throw Abort(.badRequest)
